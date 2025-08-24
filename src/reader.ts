@@ -7,6 +7,10 @@ export class Reader {
     public buffer: Buffer
   ) {}
 
+  public getOffset() {
+    return this.index
+  }
+
   public readByte(): number {
     const value = this.buffer.readUint8(this.index)
     this.index += 1
@@ -26,7 +30,7 @@ export class Reader {
   }
 
   public readUInt64(): bigint {
-    const value = this.buffer.readBigUint64BE(this.index)
+    const value = this.buffer.readBigUint64LE(this.index)
     this.index += 8
     return value
   }
@@ -38,7 +42,7 @@ export class Reader {
   }
 
   public readInt64(): bigint {
-    const value = this.buffer.readBigInt64BE(this.index)
+    const value = this.buffer.readBigInt64LE(this.index)
     this.index += 8
     return value
   }
@@ -69,6 +73,10 @@ export class Reader {
 
   public skipBytes(amount: number) {
     this.index += amount
+  }
+  
+  public readToEnd() {
+    return this.buffer.subarray(this.index, this.buffer.length)
   }
 
   public readVariantDict(): Map<string, VariantDictValue> {

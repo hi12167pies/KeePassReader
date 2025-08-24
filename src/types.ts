@@ -10,10 +10,10 @@ export enum HeaderId {
 }
 
 export type Headers = {
-  encryptionUUID?: bigint
+  encryptionAlgorithm?: bigint
   compression?: number,
   masterSeed?: Buffer,
-  encrpytionIV?: Buffer,
+  encryptionIV?: Buffer,
   kdfParameters?: Map<string, VariantDictValue>,
   customData?: Map<string, VariantDictValue>,
 }
@@ -26,6 +26,27 @@ export const EncryptionAlgorithm = {
 export enum CompressionAlgorithm {
   None = 0,
   GZIP = 1
+}
+
+export const KDF_PARAMETER_UUID = "$UUID"
+
+export const KDFMethod = {
+  AES_KDF: 0xC9D9F39A628A4460BF740D08C18A4FEAn,
+  Argon2: 0xEF636DDF8C29444B91F7A9A403E30A0Cn,
+  Argon2id: 0x9E298B1956DB4773B23DFC3EC6F0A1E6n,
+}
+
+export enum KDFParameterAES {
+  Salt = "S",
+  Rounds = "R"
+}
+
+export enum KDFParameterArgon2 {
+  Version = "V",
+  Salt = "S",
+  Iterations = "I",
+  Memory = "M",
+  Parallelism = "P"
 }
 
 export type VariantDictValue = number | bigint | boolean | string | Buffer 
