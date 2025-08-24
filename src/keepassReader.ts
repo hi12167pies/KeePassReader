@@ -4,7 +4,7 @@ import { EncryptionAlgorithm, HeaderId, Headers } from "./types"
 const SIGNATURE_1 = 0x9AA2D903
 const SIGNATURE_2 = 0xB54BFB67
 
-export function readKeypass(file: Buffer, key: string) {
+export function readKeepass(file: Buffer, key: string) {
   const reader = new Reader(file)
 
   const signature1 = reader.readUInt32()
